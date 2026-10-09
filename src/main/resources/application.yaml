@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: api-tarefas
+  datasource:
+    url: jdbc:postgresql://localhost:5436/tarefasdb
+    username: admin
+    password: 123
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      show_sql: true
