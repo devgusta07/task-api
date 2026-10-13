@@ -11,6 +11,6 @@ spring:
       ddl-auto: update
       show_sql: true
 
-  jwt:
-    private-key: classpath:certs/private.key
-    public-key: classpath:certs/public.key
+jwt:
+  private-key: classpath:certs/private.key
+  public-key: classpath:certs/public.key

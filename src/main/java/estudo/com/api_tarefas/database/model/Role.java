@@ -22,6 +22,7 @@ public class Role {
     private UUID id;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     private RoleName roleName;
 
     @ManyToMany(mappedBy = "roles")
