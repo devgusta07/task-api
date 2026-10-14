@@ -45,7 +45,7 @@ public class SecuriyConfig {
                                 jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()))
                 )
                 .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/creat", "/auth/loguin", "/swagger-ui/**",
+                        auth.requestMatchers("/creat", "/loguin", "/swagger-ui/**",
                         "/v3/api-docs/**").permitAll()
                                 .requestMatchers("/user/**").hasAnyRole("BASIC", "ADMIN")
                                 .requestMatchers("/admin/**").hasRole("ADMIN")

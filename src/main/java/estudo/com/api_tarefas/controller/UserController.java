@@ -1,0 +1,30 @@
+package estudo.com.api_tarefas.controller;
+
+import estudo.com.api_tarefas.database.model.User;
+import estudo.com.api_tarefas.database.repository.UserRepository;
+import estudo.com.api_tarefas.dto.UserRequest;
+import estudo.com.api_tarefas.dto.UserResponse;
+import estudo.com.api_tarefas.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/creat")
+public class UserController {
+
+    private final UserService userservice;
+    public UserController(UserService userService) {
+        this.userservice = userService;
+    }
+
+    @PostMapping
+    public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest userRequest) {
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(userservice.createUser(userRequest));
+    }
+}
