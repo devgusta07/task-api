@@ -7,7 +7,6 @@ import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.annotation.Immutable;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -47,7 +46,7 @@ public class SecuriyConfig {
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers("/creat", "/loguin", "/swagger-ui/**",
                         "/v3/api-docs/**").permitAll()
-                                .requestMatchers("/user/**").hasAnyRole("BASIC", "ADMIN")
+                                .requestMatchers("/task/**").hasAnyRole("BASIC", "ADMIN")
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()
     );

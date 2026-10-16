@@ -6,6 +6,7 @@ import estudo.com.api_tarefas.database.repository.TaskRepository;
 import estudo.com.api_tarefas.database.repository.UserRepository;
 import estudo.com.api_tarefas.dto.TaskRequest;
 import estudo.com.api_tarefas.dto.TaskResponse;
+import estudo.com.api_tarefas.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,10 +23,10 @@ public class TaskService {
         this.userRepository = userRepository;
     }
 
-    public TaskResponse createTask(TaskRequest taskRequest) {
+    public TaskResponse createTask(TaskRequest taskRequest, UUID userId) {
 
-        User user = userRepository.findById(taskRequest.id_user())
-                .orElseThrow(() -> new RuntimeException(
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException(
                         "User not found"
                 ));
 
@@ -45,19 +46,20 @@ public class TaskService {
 
     }
 
-    public void deleteTask(UUID taskId) {
+    public void deleteTask(UUID idUser,UUID taskId) {
 
-        Task task = taskRepository.findById(taskId)
-                .orElseThrow(() -> new RuntimeException(
+        Task task = taskRepository.findByIdAndUser_Id(taskId, idUser)
+                .orElseThrow(() -> new ResourceNotFoundException(
                         "Task not found"
                 ));
 
         taskRepository.delete(task);
     }
 
-    public TaskResponse updateTask(UUID taskId, TaskRequest taskRequest) {
-        Task task = taskRepository.findById(taskId)
-                .orElseThrow(() -> new RuntimeException(
+    public TaskResponse updateTask(UUID taskId, UUID idUser, TaskRequest taskRequest) {
+
+        Task task = taskRepository.findByIdAndUser_Id(taskId, idUser)
+                .orElseThrow(() -> new ResourceNotFoundException(
                         "Task not found"
                 ));
 
@@ -75,16 +77,18 @@ public class TaskService {
 
     }
 
-    public List<TaskResponse> getAllTasks() {
+    public List<TaskResponse> getAllTasks(UUID Userid) {
 
-        return taskRepository.findAll()
-                .stream()
-                .map(task -> new TaskResponse(
-                        task.getId(),
-                        task.getName(),
-                        task.getDate(),
-                        task.getUser().getId()
-                ))
-                .toList();
+      List<Task> tasks = taskRepository.findByUserId(Userid);
+
+      return tasks.stream()
+              .map(task -> new TaskResponse(
+                      task.getId(),
+                      task.getName(),
+                      task.getDate(),
+                      task.getUser().getId()
+
+              ))
+              .toList();
     }
 }

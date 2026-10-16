@@ -8,6 +8,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface RoleRepository extends JpaRepository<Role, UUID> {
-    Boolean existsByRoleName(RoleName name);
+
     Optional<Role> findByRoleName(RoleName name);
 }

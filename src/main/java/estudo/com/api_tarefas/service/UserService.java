@@ -7,6 +7,8 @@ import estudo.com.api_tarefas.database.repository.RoleRepository;
 import estudo.com.api_tarefas.database.repository.UserRepository;
 import estudo.com.api_tarefas.dto.UserRequest;
 import estudo.com.api_tarefas.dto.UserResponse;
+import estudo.com.api_tarefas.exception.ResourceAlreadyExistsException;
+import estudo.com.api_tarefas.exception.ResourceNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +31,7 @@ public class UserService {
 
         if(userRepository.existsByUsername(request.username())){
 
-           throw new RuntimeException("Existing username");
+           throw new ResourceAlreadyExistsException("Existing username");
         }
 
         User user = new User();
@@ -37,7 +39,7 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(request.password()));
 
         Role basic = roleRepository.findByRoleName(RoleName.BASIC)
-                .orElseThrow(() -> new RuntimeException(
+                .orElseThrow(() -> new ResourceNotFoundException(
                         "Role not found"
                 ));
         user.getRoles().add(basic);

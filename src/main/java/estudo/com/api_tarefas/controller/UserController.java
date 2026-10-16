@@ -1,11 +1,8 @@
 package estudo.com.api_tarefas.controller;
 
-import estudo.com.api_tarefas.database.model.User;
-import estudo.com.api_tarefas.database.repository.UserRepository;
 import estudo.com.api_tarefas.dto.UserRequest;
 import estudo.com.api_tarefas.dto.UserResponse;
 import estudo.com.api_tarefas.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
