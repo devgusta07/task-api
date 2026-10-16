@@ -48,7 +48,7 @@ public class TaskController {
 
         UUID idUser = UUID.fromString(jwt.getSubject());
 
-        taskService.deleteTask(id, idUser);
+        taskService.deleteTask(idUser, id);
 
         return ResponseEntity.noContent().build();
     }

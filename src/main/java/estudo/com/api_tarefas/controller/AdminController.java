@@ -17,14 +17,14 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-    @GetMapping("/seacher")
+    @GetMapping("/seacher/{userId}")
     public ResponseEntity<UserResponse> getUser(@PathVariable UUID userId) {
 
         return ResponseEntity.ok(adminService.SearchUser(userId));
 
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{userId}")
     public ResponseEntity<Void> deleteUser(@PathVariable UUID userId) {
         adminService.deleteUser(userId);
         return ResponseEntity.ok().build();
