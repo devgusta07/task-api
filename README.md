@@ -96,7 +96,9 @@ Com a aplicação em execução, acesse:
 
 ## Testes
 
-Execute os testes automatizados com:
+O projeto possui testes unitários para validar as regras de negócio e o comportamento dos serviços.
+
+Para executar os testes, utilize o comando na raiz do projeto:
 
 ```powershell
 .\mvnw.cmd test
