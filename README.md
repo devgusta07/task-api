@@ -27,6 +27,7 @@ API REST desenvolvida com Java e Spring Boot para gerenciamento de tarefas com a
 - Exclusão de usuários e suas tarefas associadas.
 - Documentação interativa com Swagger.
 - Testes unitários com JUnit 5 e Mockito.
+- Tratamento de Exceções
 
 ## Como executar
 
@@ -70,13 +71,10 @@ openssl genpkey -algorithm RSA -out private.key -pkeyopt rsa_keygen_bits:2048
 
 ### 4. Execute a aplicação
 
-No Windows:
-
-```powershell
-.\mvnw.cmd spring-boot:run
-```
-
-
+Execute a class principal,
+```bash
+ApiTarefasApplication
+``` 
 ## Endpoints principais
 
 | Método | Rota | Descrição |
